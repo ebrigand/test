@@ -30,6 +30,10 @@ public class KataBank implements IBank {
 
     @Override
     public BigDecimal getMonthlyPNL() {
-        return null;
+        BigDecimal result = clients.values().stream().map(IClient::getMonthlyBalance)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+
+        return result.negate();
+
     }
 }
